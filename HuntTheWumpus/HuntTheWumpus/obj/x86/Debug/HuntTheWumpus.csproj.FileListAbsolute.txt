@@ -1,0 +1,7 @@
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.csprojResolveAssemblyReference.cache
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.Properties.Resources.resources
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.csproj.GenerateResource.Cache
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\bin\Debug\HuntTheWumpus.exe
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\bin\Debug\HuntTheWumpus.pdb
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.exe
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.pdb

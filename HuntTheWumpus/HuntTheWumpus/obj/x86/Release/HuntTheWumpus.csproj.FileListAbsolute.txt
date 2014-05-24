@@ -1,0 +1,3 @@
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Release\HuntTheWumpus.csprojResolveAssemblyReference.cache
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Release\HuntTheWumpus.Properties.Resources.resources
+C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Release\HuntTheWumpus.csproj.GenerateResource.Cache
