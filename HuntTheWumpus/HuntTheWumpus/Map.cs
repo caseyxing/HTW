@@ -171,6 +171,49 @@ namespace HuntTheWumpus
 			}
 		}
 
+		/* This method gets where the first bat is on 
+		 * the map.
+		 */
+		public int currentBat1
+		{
+			get
+			{
+				return superBatsLocation [0];
+			}
+		}
+
+		/* This method gets where the second bat is on 
+		 * the map.
+		 */
+		public int currentBat2
+		{
+			get
+			{
+				return superBatsLocation [1];
+			}
+		}
+
+		/* This method gets where the first pit is on 
+		 * the map.
+		 */
+		public int currentPit1
+		{
+			get
+			{
+				return bottomlessPitsLocation [0];
+			}
+		}
+
+		/* This method gets where the first bat is on 
+		 * the map.
+		 */
+		public int currentPit2
+		{
+			get {
+				return bottomlessPitsLocation [1];
+			}
+		}
+
 		/* This method checks to see if the player has encountered
 		 * any super bats. If so, then the player and bats will 
 		 * respond accordingly.
@@ -205,27 +248,28 @@ namespace HuntTheWumpus
 		/* This method tests to see if the Wumpus is awake and then
 		 * responds accordingly. 
 		 */
-		public bool awakeWumpus(int caveToShootInto)
+		public void awakeWumpus()
 		{
-			bool yes = false;
 			List<int> wumpusRooms = new List<int>();
-			bool isShot = isWumpusAt (caveToShootInto);
-			if (wumpusLocation == playerLocation || isShot) 
-			{
-				 yes = true;
 				for (int cave = 0; cave < 6; cave++)
 				{
-					if(// compound cave !=
-						isShot)
+				if(GameControl.getCompoundCaves(wumpusLocation)[cave] != 0)
 					{
-						wumpusRooms.Add(//compoundcave[cave]
-							);
+					wumpusRooms.Add(GameControl.getCompoundCaves(wumpusLocation)[cave]);
 					}
 				}
 				Random rnd = new Random();
 				wumpusLocation = wumpusRooms.IndexOf(rnd.Next(0, wumpusRooms.Count - 1));
+		}
+
+		public bool wumpusConflict()
+		{
+			if (playerLocation != wumpusLocation)
+			{
+				return false;
+
 			}
-			return yes;
+			return true;
 		}
 
 		/* This method provides warnings to the player if the player
