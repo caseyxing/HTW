@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{E9B1657A-40D6-4B52-A06A-CCA4A755E6FA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Test</RootNamespace>
+    <AssemblyName>Test</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="StartForm.cs" />
+    <Compile Include="StartForm.Designer.cs" />
+    <Compile Include="GameForm.cs" />
+    <Compile Include="GameForm.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs" />
+    <Compile Include="GameControl.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Cave.cs" />
+    <Compile Include="HighScore.cs" />
+    <Compile Include="HighScoreForm.cs" />
+    <Compile Include="HighScoreForm.Designer.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Question.cs" />
+    <Compile Include="Trivia.cs" />
+    <Compile Include="TriviaUI.cs" />
+    <Compile Include="TriviaUI.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StartForm.resx" />
+    <None Include="GameForm.resx" />
+    <None Include="Properties\Resources.resx" />
+    <None Include="Properties\Settings.settings" />
+    <None Include="HighScoreForm.resx" />
+    <None Include="0.png" />
+    <None Include="01.png" />
+    <None Include="012.png" />
+    <None Include="013.png" />
+    <None Include="014.png" />
+    <None Include="015.png" />
+    <None Include="02.png" />
+    <None Include="023.png" />
+    <None Include="024.png" />
+    <None Include="025.png" />
+    <None Include="03.png" />
+    <None Include="034.png" />
+    <None Include="035.png" />
+    <None Include="04.png" />
+    <None Include="045.png" />
+    <None Include="05.png" />
+    <None Include="1.png" />
+    <None Include="12.png" />
+    <None Include="123.png" />
+    <None Include="124.png" />
+    <None Include="125.png" />
+    <None Include="13.png" />
+    <None Include="134.png" />
+    <None Include="135.png" />
+    <None Include="14.png" />
+    <None Include="145.png" />
+    <None Include="15.png" />
+    <None Include="2.png" />
+    <None Include="23.png" />
+    <None Include="234.png" />
+    <None Include="235.png" />
+    <None Include="24.png" />
+    <None Include="245.png" />
+    <None Include="25.png" />
+    <None Include="3.png" />
+    <None Include="34.png" />
+    <None Include="345.png" />
+    <None Include="35.png" />
+    <None Include="4.png" />
+    <None Include="45.png" />
+    <None Include="5.png" />
+    <None Include="AUTO Wumpus.png" />
+    <None Include="background.png" />
+    <None Include="None.png" />
+    <None Include="Wall-e.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SplashScreen1.png" />
+    <EmbeddedResource Include="Resources\AUTO Wumpus.png" />
+    <EmbeddedResource Include="Resources\Background.png" />
+    <EmbeddedResource Include="Resources\None.png" />
+    <EmbeddedResource Include="Resources\SplashScreen.png" />
+    <EmbeddedResource Include="Resources\Wall-e.png" />
+    <EmbeddedResource Include="Resources\Wall-e1.png" />
+    <EmbeddedResource Include="SplashScreen.png" />
+  </ItemGroup>
+</Project>

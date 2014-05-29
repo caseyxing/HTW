@@ -7,78 +7,65 @@ namespace HuntTheWumpus
 {
 	public static class GameControl
     {
-		static mainUI HTWMainUI = new mainUI ();
+		static StartForm HTWStartForm = new StartForm();
+		static GameForm HTWGameForm = new GameForm ();
 		static Map HTWMap = new Map();
 		static Player HTWPlayer = new Player();
 		static Cave HTWCave = new Cave();
 		public static string playeraction = "";
+		static HighScoreForm HTWScoreForm = new HighScoreForm();
+		static HighScore HTWScore = new HighScore();
+		static TriviaUI HTWTriviaUI = new TriviaUI();
+		static Trivia HTWTrivia	= new Trivia();
 
 		public static void initializeUI()
 		{
 			updateUI ();
-			HTWMainUI.displayCaves ();
 		}
 
 		public static void updateUI()
 		{
-			bool batCollide = false;
-			bool pitCollide = false;
-			bool wumpusCollide = false;
 			int playerLocation = HTWMap.currentPlayerLocation;
 
-			if(playerLocation == HTWMap.currentBat1 || playerLocation == HTWMap.currentBat2)
-			{
-				batCollide = true;
-			}
-			if(playerLocation == HTWMap.currentPit1 || playerLocation == HTWMap.currentPit2)
-			{
-				pitCollide = true;
-			}
-			if(playerLocation == HTWMap.currentWumpusLocation)
-			{
-				wumpusCollide = true;
-			}
-
-			HTWMainUI.interfaceUpdate (HTWPlayer.GoldCoins, HTWPlayer.Turns, HTWPlayer.Arrows, HTWPlayer.computeScore(),
-				HTWMap.Warnings (HTWCave.getCompoundCave (playerLocation)), pitCollide, batCollide, wumpusCollide);
-			HTWMainUI.displayCaves ();
+			HTWGameForm.UpdateUI (HTWCave.getCompoundCave(playerLocation), HTWCave.getNeighborCaves(playerLocation), HTWPlayer.Arrows,
+				HTWPlayer.GoldCoins, HTWPlayer.Turns, HTWPlayer.computeScore (), getHazard());
 		}
 
 		public static void reset()
 		{
-			HTWMainUI = new mainUI ();
+			HTWGameForm = new GameForm ();
+			HTWScore = new HighScore ();
+			HTWScoreForm = new HighScoreForm ();
+			HTWTrivia = new Trivia ();
+			HTWTriviaUI = new TriviaUI ();
+			HTWMap = new Map ();
+			HTWCave = new Cave ();
+			HTWPlayer = new Player ();
+			HTWStartForm = new StartForm ();
 		}
 
-		public static int gethazardlocation(int hazard)
+		public static string getHazard()
 		{
-			//1-2 bats 3-4 pits 5 wumpus
-			if (hazard == 1)
+			int playerLocation = HTWMap.currentPlayerLocation;
+
+			if(playerLocation == HTWMap.currentBat1 || playerLocation == HTWMap.currentBat2)
 			{
-				return HTWMap.currentBat1;
+				return "bat";
 			}
-			else if (hazard == 2)
+			if(playerLocation == HTWMap.currentPit1 || playerLocation == HTWMap.currentPit2)
 			{
-				return HTWMap.currentBat2;
+				return "pit";
 			}
-			else if (hazard == 3)
+			if(playerLocation == HTWMap.currentWumpusLocation)
 			{
-				return HTWMap.currentPit1;
+				return "wumpus";
 			}
-			else if (hazard == 4)
-			{
-				return HTWMap.currentPit2;
-			}
-			else
-			{
-				return HTWMap.currentWumpusLocation;
-			}
+
 		}
 
 		public static void BatEncounter()
 		{
 			HTWMap.batEncounter ();
-			// add show form
-			HTWMainUI.centerPlayer ();
 			updateUI ();
 		}
 
@@ -99,15 +86,22 @@ namespace HuntTheWumpus
 		public static void BuyArrow()
 		{
 			HTWPlayer.Turns++;
-			//HTWTrivia.Trivia
+			HTWTriviaUI.nextQuestion (3);
 			playeraction = "buy";
 		}
 
 		public static void Secret()
 		{
 			HTWPlayer.Turns++;
-			//HTWTrivia.Trivia
+			HTWTriviaUI.nextQuestion (3);
 			playeraction = "secret";
+		}
+
+		public static void	getOutOfPit()
+		{
+			HTWPlayer.Turns++;
+			HTWTriviaUI.nextQuestion (3);
+			playeraction = "pit";
 		}
 
 		public static int[] getCompoundCaves(int currentLocation)
@@ -119,5 +113,32 @@ namespace HuntTheWumpus
 		{
 			return HTWMap.Secret ();
 		}
+		public static string getWarning()
+		{
+			return HTWMap.Warnings (HTWCave.getCompoundCave (HTWMap.currentPlayerLocation));
+		}
+
+		public static void triviaFinal()
+		{
+			if (playeraction == "buy" && HTWTriviaUI.GetCorrectAnswers () >= 2)
+			{
+				HTWPlayer.purchaseArrowsSuccess ();
+			}
+			if (playeraction == "secret" && HTWTriviaUI.GetCorrectAnswers () >= 2)
+			{
+				HTWMap.Secret ();
+			}
+			if (playeraction == "pit" && HTWTriviaUI.GetCorrectAnswers () >= 2)
+			{
+				HTWMap.startPlayerLocation;
+			}
+
+		}
+
+		public static string passHighScore()
+		{
+			HTWPlayer.computeScore ();
+		}
+
     }
 }

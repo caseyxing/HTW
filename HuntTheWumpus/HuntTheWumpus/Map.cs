@@ -40,7 +40,10 @@ namespace HuntTheWumpus
 		public string[] secretList = new string[6];
 		// This integer variable holds the number of caves
 		// in the game.
-		public static int numberOfCaves = 30;
+		public int numberOfCaves = 30;
+		// This integer variable holds the starting location
+		// of the player.
+		public int startLocation;
 
 		public Map ()
 		{
@@ -77,6 +80,7 @@ namespace HuntTheWumpus
 			// The room number is removed so that no other object can be placed there.
 			roomNumbers.RemoveAt (roomNumbers.IndexOf(playerLocation));
 			playerRoomNumber.RemoveAt (playerRoomNumber.IndexOf(playerLocation));
+			startLocation = playerLocation;
 		}
 
 		/* This method generate two room numbers for
@@ -144,6 +148,13 @@ namespace HuntTheWumpus
 			secretList [5] =  "I don't feel like telling you a secret.";
 		}
 
+		public int startPlayerLocation
+		{
+			get
+			{
+				return startLocation;
+			}
+		}
 		/* This method gets and sets where the player is on 
 		 * the map.
 		 */
@@ -286,35 +297,40 @@ namespace HuntTheWumpus
 			{
 				if (superBatsLocation [0] == connectingCaves [cave]) {
 					isBat = true;
+					break;
 				}
 				if (superBatsLocation [1] == connectingCaves [cave]) {
 					isBat = true;
+					break;
 				}
 				if (bottomlessPitsLocation [0] == connectingCaves [cave]) {
 					isPit = true;
+					break;
 				}
 				if (bottomlessPitsLocation [1] == connectingCaves [cave]) {
 					isPit = true;
+					break;
 				}
 				if (wumpusLocation == connectingCaves [cave]) {
 					isWumpus = true;
+					break;
 				}
 			}
 
-				if (isWumpus)
-				{
-					Warning += warningList [0] + " ";
-				}
-				if (isBat)
-				{
-					Warning += warningList [1] + " ";
-				}
-				if (isPit)
-				{
-					Warning += warningList [2];
-				}
+			if (isBat)
+			{
+				Warning += warningList [1] + " ";
+			}
+			if (isWumpus)
+			{
+				Warning += warningList [0] + " ";
+			}
+			if (isPit)
+			{
+				Warning += warningList [2];
+			}
 
-				return Warning;
+			return Warning;
 		}
 
 		/* This method provides secrets that the player can purchase.
