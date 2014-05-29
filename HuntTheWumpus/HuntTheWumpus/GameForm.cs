@@ -49,6 +49,7 @@ namespace HuntTheWumpus
 		int[] caveNeighbors; // Local copy of cave neighbor data.
 		bool refresh = true; // We don't want to constantly update labels if not necessary
 		bool enter = false; // Avoid over-triggering
+        bool hazardActivated = false;
 		int[] movement = new int[DIMENSIONS]; // x and y movement
 
         /**
@@ -76,47 +77,59 @@ namespace HuntTheWumpus
 		// Movement Form Events
 		private void GameForm_KeyDown(object sender, KeyEventArgs e)
 		{
-			switch (e.KeyCode)
-			{
-				case Keys.Left:
-					movement[LEFT_RIGHT] = -MOVEMENT_CONSTANT;
-					break;
-				case Keys.Right:
-					movement[LEFT_RIGHT] = MOVEMENT_CONSTANT;
-					break;
-				case Keys.Down:
-					movement[UP_DOWN] = MOVEMENT_CONSTANT;
-					break;
-				case Keys.Up:
-					movement[UP_DOWN] = -MOVEMENT_CONSTANT;
-					break;
-			}
+            if (!hazardActivated)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        movement[LEFT_RIGHT] = -MOVEMENT_CONSTANT;
+                        break;
+                    case Keys.Right:
+                        movement[LEFT_RIGHT] = MOVEMENT_CONSTANT;
+                        break;
+                    case Keys.Down:
+                        movement[UP_DOWN] = MOVEMENT_CONSTANT;
+                        break;
+                    case Keys.Up:
+                        movement[UP_DOWN] = -MOVEMENT_CONSTANT;
+                        break;                    
+                }
+            }
 		}
 
 		private void GameForm_KeyUp(object sender, KeyEventArgs e)
 		{
-			switch (e.KeyCode)
-			{
-				case Keys.Left:
-					if (movement[LEFT_RIGHT] == -MOVEMENT_CONSTANT)
-						movement[LEFT_RIGHT] = 0;
-					break;
-				case Keys.Right:
-					if (movement[LEFT_RIGHT] == MOVEMENT_CONSTANT)
-						movement[LEFT_RIGHT] = 0;
-					break;
-				case Keys.Down:
-					if (movement[UP_DOWN] == MOVEMENT_CONSTANT)
-						movement[UP_DOWN] = 0;
-					break;
-				case Keys.Up:
-					if (movement[UP_DOWN] == -MOVEMENT_CONSTANT)
-						movement[UP_DOWN] = 0;
-					break;
-				case Keys.Y:
-					enter = true;
-					break;
-			}
+            if (!hazardActivated)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        if (movement[LEFT_RIGHT] == -MOVEMENT_CONSTANT)
+                            movement[LEFT_RIGHT] = 0;
+                        break;
+                    case Keys.Right:
+                        if (movement[LEFT_RIGHT] == MOVEMENT_CONSTANT)
+                            movement[LEFT_RIGHT] = 0;
+                        break;
+                    case Keys.Down:
+                        if (movement[UP_DOWN] == MOVEMENT_CONSTANT)
+                            movement[UP_DOWN] = 0;
+                        break;
+                    case Keys.Up:
+                        if (movement[UP_DOWN] == -MOVEMENT_CONSTANT)
+                            movement[UP_DOWN] = 0;
+                        break;
+                    case Keys.Y:
+                        enter = true;
+                        break;
+                    case Keys.D1:
+                        //TODO: GameControl
+                        break;
+                    case Keys.D2:
+                        //TODO: GameControl
+                        break;
+                }
+            }
 		}
 
 		private void Update_Tick(object sender, EventArgs e)
@@ -140,8 +153,11 @@ namespace HuntTheWumpus
 			playerSprite.Location = nextDestination;
 			if (refresh)
 				checkLocation();
-            if (actionLabel.Text != "" && enter) { }
+            if (actionLabel.Text != "" && enter) 
+            {
                 // TODO - Tell GameControl the player moved.
+                playerSprite.Location = new Point(77, 102);
+            }                
             else
                 enter = false;
 		}
@@ -171,8 +187,8 @@ namespace HuntTheWumpus
 			int doorid = MAX_CAVES;
 			for (int index = 0; index < MAX_CAVES; index++)
 			{
-				/*if (caveConnections[index] == 0)
-					continue;*/
+				if (caveConnections[index] == 0)
+					continue;
 				int[] caveCenter = new int[DIMENSIONS]{caves[index].Left + caves[index].Width, caves[index].Top + caves[index].Height};
 				if ((playerCenter[X_COORD] - caveCenter[X_COORD]) * (playerCenter[X_COORD] - caveCenter[X_COORD]) + 
 					(playerCenter[Y_COORD] - caveCenter[Y_COORD]) * (playerCenter[Y_COORD] - caveCenter[Y_COORD]) < playerSprite.Width * playerSprite.Height * COLLISION_STRETCH_FACTOR)
@@ -181,10 +197,10 @@ namespace HuntTheWumpus
 					break;
 				}
 			}
-			/*if (doorid != MAX_CAVES)
+			if (doorid != MAX_CAVES)
 				actionLabel.Text = "Do you want to enter room " + caveNeighbors[doorid].ToString() + "? (y/n)";
 			else
-				actionLabel.Text = "";*/
+				actionLabel.Text = "";
 
 		}
 
@@ -218,6 +234,19 @@ namespace HuntTheWumpus
 			goldHolder.Text = gold.ToString();
 			turnHolder.Text = turns.ToString();
 			//TODO: Display Hazard
+            hazardBox.Visible = true;
+            hazardActivated = true;
+            if (hazard == "bat")
+            { }
+            else if (hazard == "pit")
+            { }
+            else if (hazard == "wumpus")
+            { }
+            else
+            {
+                hazardBox.Visible = false;
+                hazardActivated = false;
+            }
 		}
 
 		private void this_Enter(object sender, EventArgs e)
