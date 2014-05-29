@@ -5,3 +5,12 @@ C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\bin\Debug\HuntTh
 C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\bin\Debug\HuntTheWumpus.pdb
 C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.exe
 C:\Users\Casey\Documents\GitHub\HTW\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.pdb
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.exe
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.pdb
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.csprojResolveAssemblyReference.cache
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.Properties.Resources.resources
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.StartForm.resources
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.csproj.GenerateResource.Cache
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\obj\x86\Debug\HuntTheWumpus.GameForm.resources
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\bin\Debug\HuntTheWumpus.exe
+H:\Documents\HTW-master\HTW-master\HuntTheWumpus\HuntTheWumpus\bin\Debug\HuntTheWumpus.pdb

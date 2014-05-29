@@ -14,6 +14,32 @@ namespace HuntTheWumpus
      */
     public partial class GameForm : Form
     {
+		// Anti-flicker
+		int originalExStyle = -1;
+		bool enableFormLevelDoubleBuffering = true;
+		protected override CreateParams CreateParams
+		{
+			get
+			{
+				if (originalExStyle == -1)
+					originalExStyle = base.CreateParams.ExStyle;
+				CreateParams cp = base.CreateParams;
+				if (enableFormLevelDoubleBuffering)
+					cp.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED
+				else
+					cp.ExStyle = originalExStyle;
+				return cp;
+			}
+		}
+		private void TurnOffFormLevelDoubleBuffering()
+		{
+			enableFormLevelDoubleBuffering = false;
+			this.MaximizeBox = true;
+		}
+		private void frmMain_Shown(object sender, EventArgs e)
+		{
+			TurnOffFormLevelDoubleBuffering();
+		}
 		const int MOVEMENT_CONSTANT = 5, LEFT_RIGHT = 0, UP_DOWN = 1, X_COORD = 0, Y_COORD = 1, MAX_CAVES = 6, 
             DIMENSIONS = 2, GAME_AREA_HEIGHT = 603;
         const double COLLISION_STRETCH_FACTOR = 1.5; // Not quite sqrt(2) in collision detection, to make it slightly more fluid.
@@ -39,6 +65,13 @@ namespace HuntTheWumpus
             this.caveConnections = caveConnections;
             this.caveNeighbors = caveNeighbors;
         }
+
+		public GameForm()
+		{
+			InitializeComponent();
+			caves = new PictureBox[MAX_CAVES] { cave0, cave1, cave2, cave3, cave4, cave5 };
+			caveLabels = new Label[MAX_CAVES] { label0, label1, label2, label3, label4, label5 };
+		}
 
 		// Movement Form Events
 		private void GameForm_KeyDown(object sender, KeyEventArgs e)
@@ -138,8 +171,8 @@ namespace HuntTheWumpus
 			int doorid = MAX_CAVES;
 			for (int index = 0; index < MAX_CAVES; index++)
 			{
-				if (caveConnections[index] == 0)
-					continue;
+				/*if (caveConnections[index] == 0)
+					continue;*/
 				int[] caveCenter = new int[DIMENSIONS]{caves[index].Left + caves[index].Width, caves[index].Top + caves[index].Height};
 				if ((playerCenter[X_COORD] - caveCenter[X_COORD]) * (playerCenter[X_COORD] - caveCenter[X_COORD]) + 
 					(playerCenter[Y_COORD] - caveCenter[Y_COORD]) * (playerCenter[Y_COORD] - caveCenter[Y_COORD]) < playerSprite.Width * playerSprite.Height * COLLISION_STRETCH_FACTOR)
@@ -148,10 +181,10 @@ namespace HuntTheWumpus
 					break;
 				}
 			}
-			if (doorid != MAX_CAVES)
+			/*if (doorid != MAX_CAVES)
 				actionLabel.Text = "Do you want to enter room " + caveNeighbors[doorid].ToString() + "? (y/n)";
 			else
-				actionLabel.Text = "";
+				actionLabel.Text = "";*/
 
 		}
 
@@ -184,6 +217,7 @@ namespace HuntTheWumpus
 			arrowHolder.Text = arrows.ToString();
 			goldHolder.Text = gold.ToString();
 			turnHolder.Text = turns.ToString();
+			//TODO: Display Hazard
 		}
 
 		private void this_Enter(object sender, EventArgs e)
@@ -200,6 +234,11 @@ namespace HuntTheWumpus
 		{
             // Don't leave any ghost processes.
 			UpdateTimer.Enabled = false;
+		}
+
+		private void GameForm_Load(object sender, EventArgs e)
+		{
+
 		}
     }
 }
