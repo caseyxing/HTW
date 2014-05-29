@@ -16,7 +16,22 @@ namespace HuntTheWumpus
             InitializeComponent();
 		}
 
-		private void startButton_Click(object sender, EventArgs e)
+		private void exitButton_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+
+		private void startButton_Click_1(object sender, EventArgs e)
+		{
+			//TODO: Tell GameControl to start.
+		}
+
+		private void hsButton_Click(object sender, EventArgs e)
+		{
+			//TODO: Tell GameControl to display HS form
+		}
+
+		private void label1_Click(object sender, EventArgs e)
 		{
 
 		}
