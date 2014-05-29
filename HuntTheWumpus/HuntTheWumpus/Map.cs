@@ -40,7 +40,10 @@ namespace HuntTheWumpus
 		public string[] secretList = new string[6];
 		// This integer variable holds the number of caves
 		// in the game.
-		public static int numberOfCaves = 30;
+		public int numberOfCaves = 30;
+		// This integer variable holds the starting location
+		// of the player.
+		public int startLocation;
 
 		public Map ()
 		{
@@ -77,6 +80,7 @@ namespace HuntTheWumpus
 			// The room number is removed so that no other object can be placed there.
 			roomNumbers.RemoveAt (roomNumbers.IndexOf(playerLocation));
 			playerRoomNumber.RemoveAt (playerRoomNumber.IndexOf(playerLocation));
+			startLocation = playerLocation;
 		}
 
 		/* This method generate two room numbers for
@@ -144,6 +148,13 @@ namespace HuntTheWumpus
 			secretList [5] =  "I don't feel like telling you a secret.";
 		}
 
+		public int startPlayerLocation
+		{
+			get
+			{
+				return startLocation;
+			}
+		}
 		/* This method gets and sets where the player is on 
 		 * the map.
 		 */
@@ -168,6 +179,49 @@ namespace HuntTheWumpus
 			get
 			{
 				return wumpusLocation;
+			}
+		}
+
+		/* This method gets where the first bat is on 
+		 * the map.
+		 */
+		public int currentBat1
+		{
+			get
+			{
+				return superBatsLocation [0];
+			}
+		}
+
+		/* This method gets where the second bat is on 
+		 * the map.
+		 */
+		public int currentBat2
+		{
+			get
+			{
+				return superBatsLocation [1];
+			}
+		}
+
+		/* This method gets where the first pit is on 
+		 * the map.
+		 */
+		public int currentPit1
+		{
+			get
+			{
+				return bottomlessPitsLocation [0];
+			}
+		}
+
+		/* This method gets where the first bat is on 
+		 * the map.
+		 */
+		public int currentPit2
+		{
+			get {
+				return bottomlessPitsLocation [1];
 			}
 		}
 
@@ -205,27 +259,28 @@ namespace HuntTheWumpus
 		/* This method tests to see if the Wumpus is awake and then
 		 * responds accordingly. 
 		 */
-		public bool awakeWumpus(int caveToShootInto)
+		public void awakeWumpus()
 		{
-			bool yes = false;
 			List<int> wumpusRooms = new List<int>();
-			bool isShot = isWumpusAt (caveToShootInto);
-			if (wumpusLocation == playerLocation || isShot) 
-			{
-				 yes = true;
 				for (int cave = 0; cave < 6; cave++)
 				{
-					if(// compound cave !=
-						isShot)
+				if(GameControl.getCompoundCaves(wumpusLocation)[cave] != 0)
 					{
-						wumpusRooms.Add(//compoundcave[cave]
-							);
+					wumpusRooms.Add(GameControl.getCompoundCaves(wumpusLocation)[cave]);
 					}
 				}
 				Random rnd = new Random();
 				wumpusLocation = wumpusRooms.IndexOf(rnd.Next(0, wumpusRooms.Count - 1));
+		}
+
+		public bool wumpusConflict()
+		{
+			if (playerLocation != wumpusLocation)
+			{
+				return false;
+
 			}
-			return yes;
+			return true;
 		}
 
 		/* This method provides warnings to the player if the player
@@ -242,35 +297,40 @@ namespace HuntTheWumpus
 			{
 				if (superBatsLocation [0] == connectingCaves [cave]) {
 					isBat = true;
+					break;
 				}
 				if (superBatsLocation [1] == connectingCaves [cave]) {
 					isBat = true;
+					break;
 				}
 				if (bottomlessPitsLocation [0] == connectingCaves [cave]) {
 					isPit = true;
+					break;
 				}
 				if (bottomlessPitsLocation [1] == connectingCaves [cave]) {
 					isPit = true;
+					break;
 				}
 				if (wumpusLocation == connectingCaves [cave]) {
 					isWumpus = true;
+					break;
 				}
 			}
 
-				if (isWumpus)
-				{
-					Warning += warningList [0] + " ";
-				}
-				if (isBat)
-				{
-					Warning += warningList [1] + " ";
-				}
-				if (isPit)
-				{
-					Warning += warningList [2];
-				}
+			if (isBat)
+			{
+				Warning += warningList [1] + " ";
+			}
+			if (isWumpus)
+			{
+				Warning += warningList [0] + " ";
+			}
+			if (isPit)
+			{
+				Warning += warningList [2];
+			}
 
-				return Warning;
+			return Warning;
 		}
 
 		/* This method provides secrets that the player can purchase.
