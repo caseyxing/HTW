@@ -180,6 +180,11 @@ namespace HuntTheWumpus
 			{
 				return wumpusLocation;
 			}
+
+			set
+			{
+				wumpusLocation = value;
+			}
 		}
 
 		/* This method gets where the first bat is on 
@@ -242,17 +247,17 @@ namespace HuntTheWumpus
 				index = 1;
 			}
 			if (index == 0 || index == 1) {
-				int location = playerRoomNumber.ElementAt (rnd.Next (0, playerRoomNumber.Count - 1));
+
+                int location = roomNumbers.ElementAt(rnd.Next(0, roomNumbers.Count - 1));
+                roomNumbers.Add(superBatsLocation[index]);
+                superBatsLocation[index] = location;
+                roomNumbers.RemoveAt(roomNumbers.IndexOf(superBatsLocation[index]));
+
+				location = playerRoomNumber.ElementAt (rnd.Next (0, playerRoomNumber.Count - 1));
 				playerRoomNumber.Add (playerLocation);
 				roomNumbers.Add (playerLocation);
 				playerLocation = location;
-				roomNumbers.RemoveAt (roomNumbers.IndexOf (playerLocation));
 				playerRoomNumber.RemoveAt (playerRoomNumber.IndexOf (playerLocation));
-
-				location = roomNumbers.ElementAt (rnd.Next (0, roomNumbers.Count - 1));
-				roomNumbers.Add (superBatsLocation [index]);
-				superBatsLocation [index] = location;
-				roomNumbers.RemoveAt (roomNumbers.IndexOf (superBatsLocation [index]));
 			}
 		}
 
@@ -262,25 +267,21 @@ namespace HuntTheWumpus
 		public void awakeWumpus()
 		{
 			List<int> wumpusRooms = new List<int>();
-				for (int cave = 0; cave < 6; cave++)
+            int[] allNeighbors = GameControl.getCompoundCaves(wumpusLocation);
+		    for (int cave = 0; cave < 6; cave++)
 				{
-				if(GameControl.getCompoundCaves(wumpusLocation)[cave] != 0)
-					{
-					wumpusRooms.Add(GameControl.getCompoundCaves(wumpusLocation)[cave]);
-					}
+				if(allNeighbors[cave] != 0)
+				{
+				    wumpusRooms.Add(allNeighbors[cave]);
 				}
-				Random rnd = new Random();
-				wumpusLocation = wumpusRooms.IndexOf(rnd.Next(0, wumpusRooms.Count - 1));
+			}
+			Random rnd = new Random();
+			wumpusLocation = wumpusRooms.ElementAt(rnd.Next(0, wumpusRooms.Count - 1));
 		}
 
 		public bool wumpusConflict()
 		{
-			if (playerLocation != wumpusLocation)
-			{
-				return false;
-
-			}
-			return true;
+            return (playerLocation == wumpusLocation);
 		}
 
 		/* This method provides warnings to the player if the player

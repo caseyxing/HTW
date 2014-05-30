@@ -15,13 +15,27 @@ namespace HuntTheWumpus
 		public static string playeraction = "";
 		static HighScoreForm HTWScoreForm = new HighScoreForm();
 		static HighScore HTWScore = new HighScore();
+		static HighScoreObject HTWScoreObject = new HighScoreObject();
 		static TriviaUI HTWTriviaUI = new TriviaUI();
 		static Trivia HTWTrivia	= new Trivia();
+		static ResultForm HTWResults = new ResultForm();
+        static PlayerInstructionsForm HTWInstructions = new PlayerInstructionsForm();
 
-		public static void initializeUI()
+		public static void startGame()
 		{
-			updateUI ();
+			updateUI();
+			HTWGameForm.Show();
 		}
+
+		public static void viewHighScore()
+		{
+			HTWScoreForm.Show();
+		}
+
+        public static void viewInstructions()
+        {
+            HTWInstructions.Show();
+        }
 
 		public static void updateUI()
 		{
@@ -60,16 +74,68 @@ namespace HuntTheWumpus
 			{
 				return "wumpus";
 			}
-
+			return "";
 		}
 
+		public static void continueWithHazard()
+		{
+			string hazard = getHazard();
+			if (hazard == "bat")
+			{
+				BatEncounter();
+			}
+			if (hazard == "pit")
+			{
+                pitEncounter();
+			}
+			if (hazard == "wumpus")
+			{
+				wumpusEncounter();
+			}
+		}
+
+        public static void resolveHazard(int numCorrect)
+        {
+            string hazard = getHazard();
+            if (hazard == "pit")
+            {
+                if (HTWTriviaUI.GetCorrectAnswers() < 2)
+                {
+                    gameLost();
+                }
+                else
+                {
+                    HTWMap.currentPlayerLocation = HTWMap.startPlayerLocation;
+                    HTWGameForm.clearHazard();
+                }
+            }
+            if (hazard == "wumpus")
+            {
+                if (HTWTriviaUI.GetCorrectAnswers() >= 3)
+                {
+                    WumpusRun();
+                    HTWGameForm.clearHazard();
+                    updateUI();
+                }
+                else
+                {
+                    gameLost();
+                }
+            }
+        }
 		public static void BatEncounter()
 		{
 			HTWMap.batEncounter ();
 			updateUI ();
 		}
 
-		public static void WumpusRun()
+		public static void pitEncounter()
+		{
+            HTWTriviaUI.Show();
+            HTWTriviaUI.nextQuestion(4);
+		}
+
+		public static int WumpusRun()
 		{
 			Random rnd = new Random ();
 			int upper = rnd.Next (2, 4);
@@ -79,28 +145,62 @@ namespace HuntTheWumpus
 				{
 					HTWMap.awakeWumpus ();
 				}
-				updateUI ();
 			}
+            updateUI();
+			return HTWMap.currentWumpusLocation;
 		}
 
-		public static void BuyArrow()
+		public static void buyArrow()
 		{
 			HTWPlayer.Turns++;
-			HTWTriviaUI.nextQuestion (3);
 			playeraction = "buy";
 		}
 
-		public static void Secret()
+        public static void buyStuff()
+        {
+            if(playeraction == "buy")
+            {
+                getArrow();
+            }
+            if(playeraction == "secret")
+            {
+                getTriviaSecret();
+            }
+        }
+        public static void getArrow()
+        {
+            HTWTriviaUI.Show();
+			HTWTriviaUI.nextQuestion (4);
+        }
+
+        public static void getTriviaSecret()
+        {
+        	HTWTriviaUI.Show();
+			HTWTriviaUI.nextQuestion (4);
+        }
+		public static void shoot(int selectedCave)
+		{
+			HTWPlayer.Arrows--;
+			if (selectedCave == HTWMap.currentWumpusLocation)
+			{
+				win();
+			}
+			if(HTWPlayer.Arrows == 0)
+			{
+				gameLost();
+			}
+		}
+		public static void buySecret()
 		{
 			HTWPlayer.Turns++;
-			HTWTriviaUI.nextQuestion (3);
 			playeraction = "secret";
 		}
 
 		public static void	getOutOfPit()
 		{
 			HTWPlayer.Turns++;
-			HTWTriviaUI.nextQuestion (3);
+			HTWTriviaUI.Show();
+			HTWTriviaUI.nextQuestion (4);
 			playeraction = "pit";
 		}
 
@@ -118,27 +218,54 @@ namespace HuntTheWumpus
 			return HTWMap.Warnings (HTWCave.getCompoundCave (HTWMap.currentPlayerLocation));
 		}
 
-		public static void triviaFinal()
+		public static void triviaFinal(int numCorrect)
 		{
-			if (playeraction == "buy" && HTWTriviaUI.GetCorrectAnswers () >= 2)
+			if (playeraction == "buy" && numCorrect >= 2)
 			{
 				HTWPlayer.purchaseArrowsSuccess ();
 			}
-			if (playeraction == "secret" && HTWTriviaUI.GetCorrectAnswers () >= 2)
+			if (playeraction == "secret" && numCorrect >= 2)
 			{
 				HTWMap.Secret ();
 			}
-			if (playeraction == "pit" && HTWTriviaUI.GetCorrectAnswers () >= 2)
-			{
-				HTWMap.startPlayerLocation;
-			}
 
 		}
 
-		public static string passHighScore()
+		public static int passHighScore()
 		{
-			HTWPlayer.computeScore ();
+			return HTWPlayer.computeScore ();
 		}
+
+		public static void playerMove(int location)
+		{
+			HTWMap.currentPlayerLocation = location;
+			HTWPlayer.Turns++;
+			updateUI();
+		}
+
+		private static void win()
+		{
+            HTWResults.setResult(true);
+			HTWResults.Show();
+		}
+
+		private static void gameLost()
+		{
+            HTWResults.setResult(false);
+			HTWResults.Show();
+		}
+
+		public static void caveSelection(int cave)
+		{
+			HTWCave.loadCave(cave);
+		}
+
+		public static void wumpusEncounter()
+		{
+            HTWTriviaUI.Show();
+            HTWTriviaUI.nextQuestion(6);
+		}
+
 
     }
 }

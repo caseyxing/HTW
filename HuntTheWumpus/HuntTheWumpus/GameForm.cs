@@ -50,6 +50,7 @@ namespace HuntTheWumpus
 		bool refresh = true; // We don't want to constantly update labels if not necessary
 		bool enter = false; // Avoid over-triggering
         bool hazardActivated = false;
+		int doorid;
 		int[] movement = new int[DIMENSIONS]; // x and y movement
 
         /**
@@ -73,6 +74,12 @@ namespace HuntTheWumpus
 			caves = new PictureBox[MAX_CAVES] { cave0, cave1, cave2, cave3, cave4, cave5 };
 			caveLabels = new Label[MAX_CAVES] { label0, label1, label2, label3, label4, label5 };
 		}
+
+        public void clearHazard()
+        {
+            hazardActivated = false;
+        }
+            
 
 		// Movement Form Events
 		private void GameForm_KeyDown(object sender, KeyEventArgs e)
@@ -99,37 +106,41 @@ namespace HuntTheWumpus
 
 		private void GameForm_KeyUp(object sender, KeyEventArgs e)
 		{
-            if (!hazardActivated)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.Left:
-                        if (movement[LEFT_RIGHT] == -MOVEMENT_CONSTANT)
-                            movement[LEFT_RIGHT] = 0;
-                        break;
-                    case Keys.Right:
-                        if (movement[LEFT_RIGHT] == MOVEMENT_CONSTANT)
-                            movement[LEFT_RIGHT] = 0;
-                        break;
-                    case Keys.Down:
-                        if (movement[UP_DOWN] == MOVEMENT_CONSTANT)
-                            movement[UP_DOWN] = 0;
-                        break;
-                    case Keys.Up:
-                        if (movement[UP_DOWN] == -MOVEMENT_CONSTANT)
-                            movement[UP_DOWN] = 0;
-                        break;
-                    case Keys.Y:
-                        enter = true;
-                        break;
-                    case Keys.D1:
-                        //TODO: GameControl
-                        break;
-                    case Keys.D2:
-                        //TODO: GameControl
-                        break;
-                }
-            }
+			if (!hazardActivated)
+			{
+				switch (e.KeyCode)
+				{
+					case Keys.Left:
+						if (movement[LEFT_RIGHT] == -MOVEMENT_CONSTANT)
+							movement[LEFT_RIGHT] = 0;
+						break;
+					case Keys.Right:
+						if (movement[LEFT_RIGHT] == MOVEMENT_CONSTANT)
+							movement[LEFT_RIGHT] = 0;
+						break;
+					case Keys.Down:
+						if (movement[UP_DOWN] == MOVEMENT_CONSTANT)
+							movement[UP_DOWN] = 0;
+						break;
+					case Keys.Up:
+						if (movement[UP_DOWN] == -MOVEMENT_CONSTANT)
+							movement[UP_DOWN] = 0;
+						break;
+					case Keys.Y:
+						enter = true;
+						break;
+					case Keys.D1:
+						GameControl.buyArrow();
+						break;
+					case Keys.D2:
+						GameControl.buySecret();
+						break;
+				}
+			}
+			else
+			{
+				GameControl.continueWithHazard();
+			}
 		}
 
 		private void Update_Tick(object sender, EventArgs e)
@@ -155,11 +166,13 @@ namespace HuntTheWumpus
 				checkLocation();
             if (actionLabel.Text != "" && enter) 
             {
-                // TODO - Tell GameControl the player moved.
-                playerSprite.Location = new Point(77, 102);
+				GameControl.playerMove(caveNeighbors[doorid]);
+				playerSprite.Location = caves[(doorid+3) % 6].Location;
+				enter = false;
             }                
             else
                 enter = false;
+            Warnings();
 		}
 
         /**
@@ -184,7 +197,7 @@ namespace HuntTheWumpus
 		private void checkLocation()
 		{
 			int[] playerCenter = new int[DIMENSIONS]{playerSprite.Left + playerSprite.Width, playerSprite.Top + playerSprite.Height};
-			int doorid = MAX_CAVES;
+			doorid = MAX_CAVES;
 			for (int index = 0; index < MAX_CAVES; index++)
 			{
 				if (caveConnections[index] == 0)
@@ -233,21 +246,25 @@ namespace HuntTheWumpus
 			arrowHolder.Text = arrows.ToString();
 			goldHolder.Text = gold.ToString();
 			turnHolder.Text = turns.ToString();
-			//TODO: Display Hazard
             hazardBox.Visible = true;
             hazardActivated = true;
             if (hazard == "bat")
-            { }
+            { this.hazardBox.Image = HuntTheWumpus.Properties.Resources.SecurityBot; }
             else if (hazard == "pit")
-            { }
+            { this.hazardBox.Image = HuntTheWumpus.Properties.Resources.pit; }
             else if (hazard == "wumpus")
-            { }
+            { this.hazardBox.Image = HuntTheWumpus.Properties.Resources.AUTO_Wumpus; }
             else
             {
                 hazardBox.Visible = false;
                 hazardActivated = false;
             }
 		}
+
+        public void Warnings()
+        {
+            notificationLabel.Text = GameControl.getWarning();
+        }
 
 		private void this_Enter(object sender, EventArgs e)
 		{

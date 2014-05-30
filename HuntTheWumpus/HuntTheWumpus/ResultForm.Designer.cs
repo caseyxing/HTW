@@ -20,6 +20,7 @@
 			base.Dispose(disposing);
 		}
 
+
 		#region Windows Form Designer generated code
 
 		/// <summary>
@@ -28,11 +29,22 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Text = "ResultForm";
+            this.SuspendLayout();
+            // 
+            // ResultForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "ResultForm";
+            this.Text = "ResultForm";
+            this.Load += new System.EventHandler(this.ResultForm_Load);
+            this.ResumeLayout(false);
+
 		}
 
 		#endregion
-	}
+
+    }
 }

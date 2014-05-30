@@ -28,24 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.tempScoreLabel = new System.Windows.Forms.Label();
 			this.enterNameLabel = new System.Windows.Forms.Label();
 			this.nameTextBox = new System.Windows.Forms.TextBox();
-			this.tempScoreTextBox = new System.Windows.Forms.TextBox();
 			this.highScoresBox = new System.Windows.Forms.ListBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.HighScoreTitleLabel = new System.Windows.Forms.Label();
 			this.SuspendLayout();
-			// 
-			// tempScoreLabel
-			// 
-			this.tempScoreLabel.AutoSize = true;
-			this.tempScoreLabel.Font = new System.Drawing.Font("Algerian", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.tempScoreLabel.Location = new System.Drawing.Point(95, 126);
-			this.tempScoreLabel.Name = "tempScoreLabel";
-			this.tempScoreLabel.Size = new System.Drawing.Size(72, 12);
-			this.tempScoreLabel.TabIndex = 5;
-			this.tempScoreLabel.Text = "Temp Score:";
 			// 
 			// enterNameLabel
 			// 
@@ -64,13 +52,6 @@
 			this.nameTextBox.Size = new System.Drawing.Size(172, 20);
 			this.nameTextBox.TabIndex = 7;
 			this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged_1);
-			// 
-			// tempScoreTextBox
-			// 
-			this.tempScoreTextBox.Location = new System.Drawing.Point(224, 126);
-			this.tempScoreTextBox.Name = "tempScoreTextBox";
-			this.tempScoreTextBox.Size = new System.Drawing.Size(169, 20);
-			this.tempScoreTextBox.TabIndex = 8;
 			// 
 			// highScoresBox
 			// 
@@ -107,10 +88,8 @@
 			this.Controls.Add(this.HighScoreTitleLabel);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.highScoresBox);
-			this.Controls.Add(this.tempScoreTextBox);
 			this.Controls.Add(this.nameTextBox);
 			this.Controls.Add(this.enterNameLabel);
-			this.Controls.Add(this.tempScoreLabel);
 			this.Name = "HighScoreForm";
 			this.Load += new System.EventHandler(this.HighScoreForm_Load_1);
 			this.ResumeLayout(false);
@@ -126,10 +105,8 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ListBox listBox1;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Label tempScoreLabel;
 		private System.Windows.Forms.Label enterNameLabel;
 		private System.Windows.Forms.TextBox nameTextBox;
-		private System.Windows.Forms.TextBox tempScoreTextBox;
 		private System.Windows.Forms.ListBox highScoresBox;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Label HighScoreTitleLabel;

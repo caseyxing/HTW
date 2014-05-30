@@ -89,7 +89,7 @@
             this.cappyPanel.Controls.Add(this.turnLabel);
             this.cappyPanel.Controls.Add(this.arrowHolder);
             this.cappyPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cappyPanel.Location = new System.Drawing.Point(12, 655);
+            this.cappyPanel.Location = new System.Drawing.Point(12, 643);
             this.cappyPanel.Name = "cappyPanel";
             this.cappyPanel.Size = new System.Drawing.Size(641, 248);
             this.cappyPanel.TabIndex = 2;
@@ -98,7 +98,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(7, 125);
+            this.label8.Location = new System.Drawing.Point(7, 104);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(110, 42);
             this.label8.TabIndex = 13;
@@ -108,7 +108,7 @@
             // actionLabel
             // 
             this.actionLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.actionLabel.Location = new System.Drawing.Point(149, 125);
+            this.actionLabel.Location = new System.Drawing.Point(149, 109);
             this.actionLabel.Name = "actionLabel";
             this.actionLabel.Size = new System.Drawing.Size(486, 40);
             this.actionLabel.TabIndex = 12;
@@ -117,14 +117,14 @@
             // 
             this.label7.Location = new System.Drawing.Point(7, 20);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 42);
+            this.label7.Size = new System.Drawing.Size(110, 34);
             this.label7.TabIndex = 11;
             this.label7.Text = "Notifications:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(7, 76);
+            this.label6.Location = new System.Drawing.Point(7, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(110, 42);
             this.label6.TabIndex = 10;
@@ -134,7 +134,7 @@
             // notificationLabel
             // 
             this.notificationLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.notificationLabel.Location = new System.Drawing.Point(149, 20);
+            this.notificationLabel.Location = new System.Drawing.Point(149, 16);
             this.notificationLabel.Name = "notificationLabel";
             this.notificationLabel.Size = new System.Drawing.Size(486, 40);
             this.notificationLabel.TabIndex = 7;
@@ -142,7 +142,7 @@
             // secretLabel
             // 
             this.secretLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.secretLabel.Location = new System.Drawing.Point(149, 76);
+            this.secretLabel.Location = new System.Drawing.Point(149, 65);
             this.secretLabel.Name = "secretLabel";
             this.secretLabel.Size = new System.Drawing.Size(486, 40);
             this.secretLabel.TabIndex = 6;
@@ -150,7 +150,7 @@
             // goldHolder
             // 
             this.goldHolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.goldHolder.Location = new System.Drawing.Point(149, 198);
+            this.goldHolder.Location = new System.Drawing.Point(149, 176);
             this.goldHolder.Name = "goldHolder";
             this.goldHolder.Size = new System.Drawing.Size(486, 20);
             this.goldHolder.TabIndex = 4;
@@ -160,7 +160,7 @@
             // turnHolder
             // 
             this.turnHolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.turnHolder.Location = new System.Drawing.Point(149, 218);
+            this.turnHolder.Location = new System.Drawing.Point(149, 198);
             this.turnHolder.Name = "turnHolder";
             this.turnHolder.Size = new System.Drawing.Size(486, 20);
             this.turnHolder.TabIndex = 5;
@@ -169,7 +169,7 @@
             // 
             // arrowLabel
             // 
-            this.arrowLabel.Location = new System.Drawing.Point(4, 178);
+            this.arrowLabel.Location = new System.Drawing.Point(4, 155);
             this.arrowLabel.Name = "arrowLabel";
             this.arrowLabel.Size = new System.Drawing.Size(113, 20);
             this.arrowLabel.TabIndex = 0;
@@ -178,7 +178,7 @@
             // 
             // goldLabel
             // 
-            this.goldLabel.Location = new System.Drawing.Point(4, 198);
+            this.goldLabel.Location = new System.Drawing.Point(4, 174);
             this.goldLabel.Name = "goldLabel";
             this.goldLabel.Size = new System.Drawing.Size(113, 20);
             this.goldLabel.TabIndex = 1;
@@ -187,7 +187,7 @@
             // 
             // turnLabel
             // 
-            this.turnLabel.Location = new System.Drawing.Point(4, 218);
+            this.turnLabel.Location = new System.Drawing.Point(4, 195);
             this.turnLabel.Name = "turnLabel";
             this.turnLabel.Size = new System.Drawing.Size(113, 20);
             this.turnLabel.TabIndex = 2;
@@ -197,7 +197,7 @@
             // arrowHolder
             // 
             this.arrowHolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.arrowHolder.Location = new System.Drawing.Point(149, 178);
+            this.arrowHolder.Location = new System.Drawing.Point(149, 156);
             this.arrowHolder.Name = "arrowHolder";
             this.arrowHolder.Size = new System.Drawing.Size(486, 20);
             this.arrowHolder.TabIndex = 3;
@@ -351,9 +351,11 @@
             // hazardBox
             // 
             this.hazardBox.BackColor = System.Drawing.Color.Transparent;
+            this.hazardBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.hazardBox.Location = new System.Drawing.Point(185, 189);
             this.hazardBox.Name = "hazardBox";
             this.hazardBox.Size = new System.Drawing.Size(288, 245);
+            this.hazardBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.hazardBox.TabIndex = 15;
             this.hazardBox.TabStop = false;
             // 
@@ -363,7 +365,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::HuntTheWumpus.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(659, 907);
+            this.ClientSize = new System.Drawing.Size(660, 868);
             this.Controls.Add(this.cappyPanel);
             this.Controls.Add(this.playerSprite);
             this.Controls.Add(this.cave0);

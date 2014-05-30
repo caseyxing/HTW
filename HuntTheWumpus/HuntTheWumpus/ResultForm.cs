@@ -15,5 +15,18 @@ namespace HuntTheWumpus
 		{
 			InitializeComponent();
 		}
+
+		private void ResultForm_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		public void setResult(bool Win)
+		{
+            if (Win)
+            {this.BackgroundImage = HuntTheWumpus.Properties.Resources.win; }
+            else
+            { this.BackgroundImage = HuntTheWumpus.Properties.Resources.lose;}
+		}
 	}
 }

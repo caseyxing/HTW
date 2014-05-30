@@ -15,12 +15,17 @@ namespace HuntTheWumpus
 
 		//creating a new instance of the class so that its methods can be used
 		HighScoreObject hs = new HighScoreObject();
-
+		int score = 0;
 		public HighScoreForm()
 		{
 			//declaring the initial components and updating the list box
 			InitializeComponent();
 			UpdateListBox();
+		}
+
+		public int assignScore()
+		{
+			return GameControl.passHighScore();
 		}
 
 		//this is the method that is activated when a value in the list box is picked
@@ -31,7 +36,6 @@ namespace HuntTheWumpus
 
 			//setting the text boxes to the temprary variable that has been found
 			nameTextBox.Text = hst.name;
-			tempScoreTextBox.Text = hst.highScore.ToString();
 		}
 
 		//updating the list box when called upon
@@ -49,6 +53,12 @@ namespace HuntTheWumpus
 			}
 		}
 
+		public string selectedCave()
+		{
+			Cave highCave = new Cave();
+			return highCave.SelectedCave;
+		}
+
 		//when the button is clicked on, it will run this method
 		public void button2_Click(object sender, EventArgs e)
 		{
@@ -61,9 +71,9 @@ namespace HuntTheWumpus
 				hss.name = nameTextBox.Text;
 
 				//setting the highscore varaible to the temprary high score that is in the text
-				hss.highScore = int.Parse(GameControl.passHighScore());
+				hss.highScore = assignScore();
 
-		
+				hss.cave = selectedCave();
 				//adding the high score into the highscores list
 				hs.AddNewScore(hss);
 				string total = hss.name + "___" + hss.highScore;

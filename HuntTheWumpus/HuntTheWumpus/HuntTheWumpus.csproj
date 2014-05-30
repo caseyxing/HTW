@@ -62,20 +62,63 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveWumpus.cs" />
+    <Compile Include="ArrowsInstructionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArrowsInstructionsForm.designer.cs">
+      <DependentUpon>ArrowsInstructionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cave.cs" />
+    <Compile Include="CaveGen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CaveGen.designer.cs">
+      <DependentUpon>CaveGen.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameControl.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameForm.Designer.cs">
+    <Compile Include="GameForm.designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Highscore.cs" />
+    <Compile Include="HighScoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HighScoreForm.Designer.cs">
+      <DependentUpon>HighScoreForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LazyWumpus.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="NavigationInstructionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NavigationInstructionsForm.designer.cs">
+      <DependentUpon>NavigationInstructionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerInstructionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayerInstructionsForm.designer.cs">
+      <DependentUpon>PlayerInstructionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.cs" />
+    <Compile Include="ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScoreInstructionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScoreInstructionForm.designer.cs">
+      <DependentUpon>ScoreInstructionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sound.cs" />
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>
@@ -83,13 +126,43 @@
     <Compile Include="StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Trivia.cs" />
-    <Compile Include="TriviaForm.cs">
+    <Compile Include="TrapsInstructionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TriviaForm.Designer.cs">
-      <DependentUpon>TriviaForm.cs</DependentUpon>
+    <Compile Include="TrapsInstructionsForm.designer.cs">
+      <DependentUpon>TrapsInstructionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Trivia.cs" />
+    <Compile Include="TriviaInstructionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TriviaInstructionsForm.designer.cs">
+      <DependentUpon>TriviaInstructionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TriviaUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TriviaUI.Designer.cs">
+      <DependentUpon>TriviaUI.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ArrowsInstructionsForm.resx">
+      <DependentUpon>ArrowsInstructionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaveGen.resx">
+      <DependentUpon>CaveGen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameForm.resx">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HighScoreForm.resx">
+      <DependentUpon>HighScoreForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NavigationInstructionsForm.resx">
+      <DependentUpon>NavigationInstructionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerInstructionsForm.resx">
+      <DependentUpon>PlayerInstructionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -100,6 +173,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScoreInstructionForm.resx">
+      <DependentUpon>ScoreInstructionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StartForm.resx">
+      <DependentUpon>StartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrapsInstructionsForm.resx">
+      <DependentUpon>TrapsInstructionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TriviaInstructionsForm.resx">
+      <DependentUpon>TriviaInstructionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,6 +228,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="unclesam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Wall-e.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SecurityBot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AUTO Wumpus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="win.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

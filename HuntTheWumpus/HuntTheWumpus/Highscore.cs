@@ -19,6 +19,12 @@ namespace HuntTheWumpus
 		public HighScore() 
 		{ 
 		}
+		public HighScore(int highscore, String cave, String name)
+		{
+			this.highScore = highscore;
+			this.cave = cave;
+			this.name = name;
+		}
 	}
 
 	public class HighScoreObject

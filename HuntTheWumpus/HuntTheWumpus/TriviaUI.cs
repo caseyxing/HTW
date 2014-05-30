@@ -25,6 +25,7 @@ namespace HuntTheWumpus
 		private int index = 0;
 		private int correctAnswerNumber = 0;
 		private int numQuestionsToDisplay = 3;
+		int questionsNeeded = 0;
 
 		public void LoadQuestions()
 		{
@@ -68,7 +69,7 @@ namespace HuntTheWumpus
 			}
 			else
 			{
-				this.Close();
+				this.Hide();
 			}
 			
 			numQuestionsToDisplay = number;
@@ -76,22 +77,35 @@ namespace HuntTheWumpus
 		
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (index >= questionList.Count)
-			{
-				this.Close();
-				
-			}
-			nextQuestion();
+            index = index % questionList.Count;
+            nextQuestion(questionsNeeded);
 			DisplayQuestion(questionList[index]);
 			
 		}
 
-		public int nextQuestion(int questionsNeeded)
+		public int nextQuestion(int questionRequired)
 		{
-			questionsNeeded = questionsNeeded - 1;
-			if (questionsNeeded == 0) { this.Close(); }
+			questionsNeeded = questionRequired - 1;
+            if (questionsNeeded == 0)
+            {
+                this.Hide();
+                GameControl.resolveHazard(GetCorrectAnswers());
+                GameControl.triviaFinal(GetCorrectAnswers());
+            }
 			return questionsNeeded;
 		}
+
+        public bool finished()
+        {
+            if (questionsNeeded == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 		private void label2_Click(object sender, EventArgs e)
 		{
 
